@@ -7,7 +7,12 @@
 		<nav class="container">
 			<ul>
 				<li class="brand"><Calendar /> <strong>Svelte EventDB</strong></li>
-				<li><button class="unstyled"><LogOut size="18" /></button></li>
+				<li>
+					<form action="/app/logout" method="post">
+						<button class="contrast outline borderless" title="Log out"><LogOut size="18" /></button
+						>
+					</form>
+				</li>
 			</ul>
 		</nav>
 	</header>
@@ -47,9 +52,7 @@
 		padding-bottom: var(--pico-spacing);
 	}
 
-	.unstyled {
-		padding: calc(var(--pico-spacing) / 2);
+	.borderless {
 		border: none;
-		background-color: transparent;
 	}
 </style>
