@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Calendar, LogOut } from 'lucide-svelte';
+	import { Calendar, CalendarPlus, Home, LogOut } from 'lucide-svelte';
 </script>
 
 <div class="wrapper">
@@ -20,20 +20,33 @@
 	<main class="container">
 		<slot />
 	</main>
+
+	<div class="app-nav">
+		<nav class="container">
+			<ul>
+				<li>
+					<a role="button" class="contrast outline borderless" href="/app">
+						<Home /> <br />
+						<small>Home</small>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
 </div>
 
 <style>
 	.wrapper {
-		min-height: 100vh;
+		height: 100vh;
 		display: grid;
-		grid-template-rows: min-content 1fr;
+		grid-template-rows: min-content 1fr min-content;
 	}
 
 	header {
 		border-bottom: solid thin var(--pico-muted-border-color);
 	}
 
-	nav ul {
+	header nav ul {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -50,9 +63,26 @@
 	main {
 		padding-top: var(--pico-spacing);
 		padding-bottom: var(--pico-spacing);
+		overflow: auto;
 	}
 
 	.borderless {
 		border: none;
+	}
+
+	.app-nav {
+		border-top: solid thin var(--pico-muted-border-color);
+	}
+
+	.app-nav ul {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		gap: var(--pico-spacing);
+	}
+
+	.app-nav li {
+		padding-bottom: 0;
 	}
 </style>
