@@ -28,8 +28,6 @@ export const actions = {
 		});
 
 		if (!user || !bcrypt.compareSync(loginParseResult.data.password, user.password)) {
-			console.log(loginParseResult.data);
-
 			return fail(401, {
 				success: false,
 				error: 'Unknown email and password combination.'

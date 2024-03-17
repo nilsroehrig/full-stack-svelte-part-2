@@ -19,6 +19,7 @@
 		<input type="password" id="password" name="password" placeholder="Password..." required />
 
 		<button type="submit">Sign in</button>
+		<p class="register-link"><small><a href="/register">Create account</a></small></p>
 	</form>
 </div>
 
@@ -31,5 +32,9 @@
 
 	.error {
 		color: var(--pico-color-red-500);
+	}
+
+	.register-link {
+		text-align: center;
 	}
 </style>
