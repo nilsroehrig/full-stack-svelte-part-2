@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Calendar, CalendarPlus, Home, LogOut } from 'lucide-svelte';
+	import { Calendar, CalendarDays, CalendarPlus, Home, LogOut } from 'lucide-svelte';
 </script>
 
 <div class="wrapper">
@@ -28,6 +28,12 @@
 					<a role="button" class="contrast outline borderless" href="/app">
 						<Home /> <br />
 						<small>Home</small>
+					</a>
+				</li>
+				<li>
+					<a role="button" class="contrast outline borderless" href="/app/events">
+						<CalendarDays /> <br />
+						<small>All Events</small>
 					</a>
 				</li>
 				<li>
