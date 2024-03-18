@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import { Hotel, MapPin, PenBox, User } from 'lucide-svelte';
 	import { DateTime } from 'luxon';
 
@@ -39,7 +40,8 @@
 	</p>
 </article>
 
-<form class="actions" method="post">
+<form class="actions" method="post" use:enhance>
+	<input type="hidden" name="event_id" value={data.event.id} />
 	{#if data.isParticipant}
 		<button type="submit" formaction="?/leave">Leave</button>
 	{:else}
