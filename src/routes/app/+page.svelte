@@ -7,11 +7,13 @@
 <h3>Your own events</h3>
 {#each data.events as event (event.id)}
 	{@const dateAsDateTime = DateTime.fromISO(String(event.date))}
-	<article>
-		<img src="https://picsum.photos/seed/{event.name}/300/200" alt="" />
-		<h5>{event.name}</h5>
-		<p>{dateAsDateTime.toLocaleString(DateTime.DATE_FULL, { locale: 'en-UK' })}</p>
-	</article>
+	<a href="/app/events/{event.id}">
+		<article>
+			<img src="https://picsum.photos/seed/{event.name}/300/200" alt="" />
+			<h5>{event.name}</h5>
+			<p>{dateAsDateTime.toLocaleString(DateTime.DATE_FULL, { locale: 'en-UK' })}</p>
+		</article>
+	</a>
 {:else}
 	<p>No events found</p>
 {/each}
@@ -46,5 +48,11 @@
 
 	article p {
 		padding-bottom: var(--pico-spacing);
+	}
+
+	a,
+	a p {
+		text-decoration: none;
+		color: inherit;
 	}
 </style>
