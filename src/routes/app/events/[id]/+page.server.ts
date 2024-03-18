@@ -1,6 +1,6 @@
 import { Event } from '$lib/server/entities/Event';
 import { User } from '$lib/server/entities/User';
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import { z } from 'zod';
 import { zfd } from 'zod-form-data';
 
@@ -29,7 +29,7 @@ export async function load({ params, locals }) {
 	};
 }
 
-const ParticipateLeaveFormData = zfd.formData(
+const EventIdFormData = zfd.formData(
 	z.object({
 		event_id: z.coerce.number()
 	})
@@ -37,7 +37,7 @@ const ParticipateLeaveFormData = zfd.formData(
 
 export const actions = {
 	async participate({ request, locals }) {
-		const formData = ParticipateLeaveFormData.parse(await request.formData());
+		const formData = EventIdFormData.parse(await request.formData());
 		const userRepository = locals.dataSource.getRepository(User);
 		const eventRepository = locals.dataSource.getRepository(Event);
 
@@ -56,7 +56,7 @@ export const actions = {
 	},
 
 	async leave({ request, locals }) {
-		const formData = ParticipateLeaveFormData.parse(await request.formData());
+		const formData = EventIdFormData.parse(await request.formData());
 		const userRepository = locals.dataSource.getRepository(User);
 		const eventRepository = locals.dataSource.getRepository(Event);
 
@@ -72,5 +72,28 @@ export const actions = {
 		event.participants = event.participants.filter((p) => p.id !== user.id);
 
 		await eventRepository.save(event);
+	},
+
+	async delete({ request, locals }) {
+		const formData = EventIdFormData.parse(await request.formData());
+		const eventRepository = locals.dataSource.getRepository(Event);
+
+		const event = await eventRepository.findOne({
+			where: { id: formData.event_id },
+			relations: ['owner']
+		});
+
+		if (!event) {
+			console.log('event not found');
+			error(500);
+		}
+
+		if (event?.owner.id !== locals.currentUser.id) {
+			error(403);
+		}
+
+		await eventRepository.delete(formData.event_id);
+
+		redirect(302, '/app');
 	}
 };

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { Hotel, MapPin, PenBox, User } from 'lucide-svelte';
+	import { Hotel, MapPin, PenBox, Trash, User } from 'lucide-svelte';
 	import { DateTime } from 'luxon';
 
 	export let data;
@@ -48,6 +48,9 @@
 		<button type="submit" formaction="?/participate">Participate</button>
 	{/if}
 	{#if data.isOwner}
+		<button class="delete secondary" type="submit" formAction="?/delete"
+			><Trash size="18" />Delete</button
+		>
 		<a role="button" class="secondary" href="/app/events/{data.event.id}/edit"
 			><PenBox size="18" /> Edit</a
 		>
@@ -85,13 +88,21 @@
 	.actions button {
 		flex: 1;
 		margin: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: calc(var(--pico-spacing) / 4);
 	}
 
 	.actions a {
-		order: 1;
+		order: 2;
 	}
 
 	.actions button {
-		order: 2;
+		order: 3;
+	}
+
+	.actions .delete {
+		order: 1;
 	}
 </style>
