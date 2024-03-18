@@ -30,6 +30,12 @@
 						<small>Home</small>
 					</a>
 				</li>
+				<li>
+					<a role="button" class="contrast outline borderless" href="/app/events/create">
+						<CalendarPlus /> <br />
+						<small>Add Event</small>
+					</a>
+				</li>
 			</ul>
 		</nav>
 	</div>
